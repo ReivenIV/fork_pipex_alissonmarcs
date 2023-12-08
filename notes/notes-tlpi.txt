@@ -1,0 +1,17 @@
+## Insights
+Se um child chamar a execve, o parent desse child não pode esperar por ele (waitpid()), pois o execve() não retorna em uma chamada bem sucedida.
+
+## Comportamento original
+
+Se um dos comandos nao existir e o outro sim, o que existe é executado:
+almarcos@c2r11p1: ~/repos_cloned/gabcollet-pipex % < README.md salve a-z A-Z | cat Makefile > salve
+zsh: command not found: salve
+almarcos@c2r11p1: ~/repos_cloned/gabcollet-pipex % echo $?                                         
+0
+
+Se os dois comandos não existirem, mostre uma mensagem de erro para ambos e 'reset' o arquivo out:
+almarcos@c2r11p1: ~/repos_cloned/gabcollet-pipex % < README.md salve a-z A-Z | hey -w CMD2 > salve
+zsh: command not found: salve
+zsh: command not found: hey
+almarcos@c2r11p1: ~/repos_cloned/gabcollet-pipex % echo $?
+127
