@@ -1,6 +1,6 @@
 NAME = pipex
 LIBFT = ./Libft/libft.a
-CFLAGS = -Wall -Werror -Wextra -g3 -O0
+CFLAGS = -Wall -Wextra -Werror -g3 -O0
 
 OBJECTS_FOLDER = ./obj/
 
