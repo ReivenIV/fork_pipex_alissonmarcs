@@ -15,3 +15,9 @@ zsh: command not found: salve
 zsh: command not found: hey
 almarcos@c2r11p1: ~/repos_cloned/gabcollet-pipex % echo $?
 127
+
+## Como que ficam os mallocs anteriores a uma call do execve()?
+
+## Verificar se o executável existe antes de fazer o fork?
+
+## Quando o primeiro comando nao existe e o segundo existe, o segundo é executado, Quando o primeiro existe e o segundo nao, o primeiro é executado. Ou seja, o shell executa os comandos na ordem que eles aparecem.

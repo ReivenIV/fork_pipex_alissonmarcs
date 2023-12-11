@@ -6,7 +6,7 @@
 /*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:55:07 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/08 16:06:49 by almarcos         ###   ########.fr       */
+/*   Updated: 2023/12/09 14:48:58 by almarcos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,28 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <string.h>
+# include <sys/wait.h>
 # include <unistd.h>
 
 typedef struct s_pipex
 {
-	int	infile;
-	int	outfile;
-}		t_pipex;
+	int		infile;
+	int		outfile;
+	int		tube[2];
+	pid_t	first_child;
+	pid_t	second_child;
+	char	**path_env;
+	char	**env;
+}			t_pipex;
 
-void	error_handler(int status);
-void	open_files(t_pipex *pipex, int argc, char *argv[]);
+void		error_handler(int status);
+void		open_files(t_pipex *pipex, int argc, char *argv[]);
+void		init_tube(t_pipex *pipex);
+void		get_path_env(t_pipex *pipex, char **env);
+void		execute(t_pipex *pipex, char *command);
+void		first_child(t_pipex *pipex, char *command);
+char		*find_executable(t_pipex *pipex, char *command);
+void		free_split(char **split);
+void		second_child(t_pipex *pipex, char *command);
 
 #endif
