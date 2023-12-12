@@ -6,7 +6,7 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:37:24 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/12 19:21:30 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/12 19:42:13 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	open_files(t_pipex *pipex, int argc, char *argv[])
 {
 	pipex->outfile = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0700);
 	if (pipex->outfile == -1)
-		error_handler(pipex, 2, argv[argc - 1]);
+		error_handler(pipex, 1, argv[argc - 1]);
 	pipex->infile = open(argv[1], O_RDONLY);
 	if (pipex->infile == -1)
 		error_handler(pipex, 1, argv[1]);
@@ -25,7 +25,7 @@ void	open_files(t_pipex *pipex, int argc, char *argv[])
 void init_tube(t_pipex *pipex)
 {
 	if (pipe(pipex->tube) == -1)
-		error_handler(pipex, 3, NULL);
+		error_handler(pipex, 1, NULL);
 }
 
 void first_child(t_pipex *pipex, char *command)
@@ -58,7 +58,7 @@ void execute(t_pipex *pipex, char *command)
 	
 	pipex->argv = ft_split(command, ' ');
 	if (pipex->argv == NULL)
-		error_handler(pipex, 5, NULL);
+		error_handler(pipex, 2, NULL);
 	path_to_exec = find_executable(pipex, pipex->argv[0]);
 	if (path_to_exec == NULL)
 		error_handler(pipex, 127, NULL);
@@ -98,7 +98,7 @@ void get_path_env(t_pipex *pipex, char **env)
 	env[i] += 5;
 	path_env = ft_split(env[i], ':');
 	if (path_env == NULL)
-		error_handler(pipex, 4, NULL);
+		error_handler(pipex, 2, NULL);
 	pipex->path_env = path_env;
 }
 
