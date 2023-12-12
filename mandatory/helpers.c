@@ -6,11 +6,19 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:37:24 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/12 19:42:13 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/12 20:21:54 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void close_files(t_pipex *pipex)
+{
+	close(pipex->infile);
+	close(pipex->outfile);
+	close(pipex->tube[0]);
+	close(pipex->tube[1]);
+}
 
 void	open_files(t_pipex *pipex, int argc, char *argv[])
 {
