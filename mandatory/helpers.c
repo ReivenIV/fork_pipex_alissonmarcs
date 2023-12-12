@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:37:24 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/09 14:45:58 by almarcos         ###   ########.fr       */
+/*   Updated: 2023/12/12 09:39:43 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	open_files(t_pipex *pipex, int argc, char *argv[])
 {
-	pipex->infile = open(argv[1], O_RDONLY);
-	if (pipex->infile == -1)
-		error_handler(1);
 	pipex->outfile = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0700);
 	if (pipex->outfile == -1)
 		error_handler(2);
+	pipex->infile = open(argv[1], O_RDONLY);
+	if (pipex->infile == -1)
+		error_handler(1);
 }
 
 void init_tube(t_pipex *pipex)
