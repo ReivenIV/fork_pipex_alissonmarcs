@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:55:07 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/09 14:48:58 by almarcos         ###   ########.fr       */
+/*   Updated: 2023/12/12 13:42:03 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_pipex
 	char	**env;
 }			t_pipex;
 
-void		error_handler(int status);
+void		error_handler(int status, char *msg);
 void		open_files(t_pipex *pipex, int argc, char *argv[]);
 void		init_tube(t_pipex *pipex);
 void		get_path_env(t_pipex *pipex, char **env);
