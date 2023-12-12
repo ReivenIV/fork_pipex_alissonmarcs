@@ -6,7 +6,7 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:55:07 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/12 20:20:38 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/12 20:27:05 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ char		*find_executable(t_pipex *pipex, char *command);
 void		free_split(char **split);
 void		second_child(t_pipex *pipex, char *command);
 void 		close_files(t_pipex *pipex);
+void		init_pipex(t_pipex *pipex, int argc, char **argv, char **env);
 
 #endif
