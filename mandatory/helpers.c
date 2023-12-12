@@ -6,7 +6,7 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:37:24 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/12 10:18:10 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/12 11:23:48 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void execute(t_pipex *pipex, char *command)
 	{
 		free_split(argv);
 		free_split(pipex->path_env);
-		error_handler(6);
+		error_handler(127);
 	}
 	execve(path_to_exec, argv, pipex->env);
 }
