@@ -6,7 +6,7 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:37:24 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/12 22:01:11 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/12 22:07:04 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,15 @@ void second_child(t_pipex *pipex, char *command)
 
 void execute(t_pipex *pipex, char *command)
 {
-	char *path_to_exec;
+	char *executable;
 	
 	pipex->argv = ft_split(command, ' ');
 	if (pipex->argv == NULL)
 		error_handler(pipex, 2, NULL);
-	path_to_exec = find_executable(pipex, pipex->argv[0]);
-	if (path_to_exec == NULL)
+	executable = find_executable(pipex, pipex->argv[0]);
+	if (executable == NULL)
 		error_handler(pipex, 127, NULL);
-	execve(path_to_exec, pipex->argv, pipex->env);
+	execve(executable, pipex->argv, pipex->env);
 }
 
 char *find_executable(t_pipex *pipex, char *command)
