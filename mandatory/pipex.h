@@ -6,7 +6,7 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:55:07 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/12 21:23:16 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/12 22:17:59 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		init_tube(t_pipex *pipex);
 void		get_path_env(t_pipex *pipex);
 void		execute(t_pipex *pipex, char *command);
 void		first_child(t_pipex *pipex, char *command);
-char		*find_executable(t_pipex *pipex, char *command);
+char		*find_executable(t_pipex *pipex);
 void		free_split(char **split);
 void		second_child(t_pipex *pipex, char *command);
 void 		close_files(t_pipex *pipex);

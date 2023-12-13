@@ -6,7 +6,7 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:37:24 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/12 22:07:04 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/12 22:18:19 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,29 +75,31 @@ void execute(t_pipex *pipex, char *command)
 	pipex->argv = ft_split(command, ' ');
 	if (pipex->argv == NULL)
 		error_handler(pipex, 2, NULL);
-	executable = find_executable(pipex, pipex->argv[0]);
+	executable = find_executable(pipex);
 	if (executable == NULL)
 		error_handler(pipex, 127, NULL);
 	execve(executable, pipex->argv, pipex->env);
 }
 
-char *find_executable(t_pipex *pipex, char *command)
+char *find_executable(t_pipex *pipex)
 {
-	char *to_check;
+	char *executable;
+	char *command;
 	char *tmp;
 	int i;
 
+	command = pipex->argv[0];
 	if (ft_strncmp(command, "./", 2) == 0 && access(command, X_OK) == 0)
 		return (command);
 	i = 0;
 	while (pipex->path_env[i])
 	{
 		tmp = ft_strjoin(pipex->path_env[i], "/");
-		to_check = ft_strjoin(tmp, command);
+		executable = ft_strjoin(tmp, command);
 		free(tmp);
-		if (access(to_check, X_OK) == 0)
-			return (to_check);
-		free(to_check);
+		if (access(executable, X_OK) == 0)
+			return (executable);
+		free(executable);
 		i++;
 	}
 	return (NULL);
