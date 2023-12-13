@@ -6,7 +6,7 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:37:24 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/12 22:18:19 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/13 11:04:52 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void init_pipex(t_pipex *pipex, int argc, char **argv, char **env)
 {
-	open_files(pipex, argc, argv);
+	pipex->parent_argv = argv;
+	pipex->parent_argc = argc;
 	pipex->env = env;
 	get_path_env(pipex);
 	init_tube(pipex);
@@ -22,20 +23,8 @@ void init_pipex(t_pipex *pipex, int argc, char **argv, char **env)
 
 void close_files(t_pipex *pipex)
 {
-	close(pipex->infile);
-	close(pipex->outfile);
 	close(pipex->tube[0]);
 	close(pipex->tube[1]);
-}
-
-void	open_files(t_pipex *pipex, int argc, char *argv[])
-{
-	pipex->outfile = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0700);
-	if (pipex->outfile == -1)
-		error_handler(pipex, 1, argv[argc - 1]);
-	pipex->infile = open(argv[1], O_RDONLY);
-	if (pipex->infile == -1)
-		error_handler(pipex, 1, argv[1]);
 }
 
 void init_tube(t_pipex *pipex)
@@ -46,24 +35,42 @@ void init_tube(t_pipex *pipex)
 
 void first_child(t_pipex *pipex, char *command)
 {
+	int infile;
+
 	pipex->first_child = fork();
 	if (pipex->first_child == 0)
 	{
 		close(pipex->tube[0]);
+		infile = open(pipex->parent_argv[1], O_RDONLY);
+		if (infile == -1)
+		{
+			close(pipex->tube[1]);
+			free_split(pipex->path_env);
+			error_handler(pipex, 1, pipex->parent_argv[1]);
+		}
 		dup2(pipex->tube[1], STDOUT_FILENO);
-		dup2(pipex->infile, STDIN_FILENO);
+		dup2(infile, STDIN_FILENO);
 		execute(pipex, command);
 	}
 }
 
 void second_child(t_pipex *pipex, char *command)
 {
+	int outfile;
+
 	pipex->second_child = fork();
 	if (pipex->second_child == 0)
 	{
 		close(pipex->tube[1]);
+		outfile = open(pipex->parent_argv[pipex->parent_argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0700);
+		if (outfile == -1)
+		{
+			close(pipex->tube[0]);
+			free_split(pipex->path_env);
+			error_handler(pipex, 1, pipex->parent_argv[pipex->parent_argc - 1]);
+		}
 		dup2(pipex->tube[0], STDIN_FILENO);
-		dup2(pipex->outfile, STDOUT_FILENO);
+		dup2(outfile, STDOUT_FILENO);
 		execute(pipex, command);
 	}
 }
