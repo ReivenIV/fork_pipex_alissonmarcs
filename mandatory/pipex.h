@@ -6,7 +6,7 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:55:07 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/13 11:32:21 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/13 11:44:59 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ typedef struct s_pipex
 	char	**path;
 }			t_pipex;
 
-void		error_handler(t_pipex *pipex, int exit_status, char *msg);
-void		init_tube(t_pipex *pipex);
-void		get_path(t_pipex *pipex);
-void		execute(t_pipex *pipex, char *command);
-void		first_child(t_pipex *pipex, char *command);
-char		*find_executable(t_pipex *pipex);
-void		free_split(char **split);
-void		second_child(t_pipex *pipex, char *command);
-void 		close_files(t_pipex *pipex);
 void		init_pipex(t_pipex *pipex, int argc, char **argv, char **env);
+void		open_tube(t_pipex *pipex);
+void 		close_tube(t_pipex *pipex);
+void		first_child(t_pipex *pipex, char *command);
+void		second_child(t_pipex *pipex, char *command);
+void		get_path(t_pipex *pipex);
+char		*find_executable(t_pipex *pipex);
+void		execute(t_pipex *pipex, char *command);
+void		free_split(char **split);
+void		error_handler(t_pipex *pipex, int exit_status, char *msg);
 
 #endif

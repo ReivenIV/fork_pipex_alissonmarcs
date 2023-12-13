@@ -6,7 +6,7 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:37:24 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/13 11:35:00 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/13 11:45:17 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,20 @@ void init_pipex(t_pipex *pipex, int argc, char **argv, char **env)
 	pipex->parent_argc = argc;
 	pipex->parent_env = env;
 	get_path(pipex);
-	init_tube(pipex);
+	open_tube(pipex);
 }
 
-void close_files(t_pipex *pipex)
-{
-	close(pipex->tube[0]);
-	close(pipex->tube[1]);
-}
 
-void init_tube(t_pipex *pipex)
+void open_tube(t_pipex *pipex)
 {
 	if (pipe(pipex->tube) == -1)
 		error_handler(pipex, 1, NULL);
+}
+
+void close_tube(t_pipex *pipex)
+{
+	close(pipex->tube[0]);
+	close(pipex->tube[1]);
 }
 
 void first_child(t_pipex *pipex, char *command)
