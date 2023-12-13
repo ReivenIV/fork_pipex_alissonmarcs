@@ -6,7 +6,7 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:55:07 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/12 20:27:05 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/12 21:23:16 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_pipex
 void		error_handler(t_pipex *pipex, int exit_status, char *msg);
 void		open_files(t_pipex *pipex, int argc, char *argv[]);
 void		init_tube(t_pipex *pipex);
-void		get_path_env(t_pipex *pipex, char **env);
+void		get_path_env(t_pipex *pipex);
 void		execute(t_pipex *pipex, char *command);
 void		first_child(t_pipex *pipex, char *command);
 char		*find_executable(t_pipex *pipex, char *command);

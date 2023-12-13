@@ -6,7 +6,7 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:37:24 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/12 20:28:44 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/12 22:01:11 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void init_pipex(t_pipex *pipex, int argc, char **argv, char **env)
 {
 	open_files(pipex, argc, argv);
-	get_path_env(pipex, env);
 	pipex->env = env;
+	get_path_env(pipex);
 	init_tube(pipex);
 }
 
@@ -103,16 +103,16 @@ char *find_executable(t_pipex *pipex, char *command)
 	return (NULL);
 }
 
-void get_path_env(t_pipex *pipex, char **env)
+void get_path_env(t_pipex *pipex)
 {
 	char **path_env;
-	int i;
+	char **env;
 
-	i = 0;
-	while (ft_strncmp(env[i], "PATH=", 5) != 0)
-		i++;
-	env[i] += 5;
-	path_env = ft_split(env[i], ':');
+	env = pipex->env;
+	while (ft_strncmp(*env, "PATH=", 5) != 0)
+		env++;
+	*env += 5;
+	path_env = ft_split(*env, ':');
 	if (path_env == NULL)
 		error_handler(pipex, 2, NULL);
 	pipex->path_env = path_env;
