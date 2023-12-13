@@ -6,7 +6,7 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:50:17 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/12 20:57:01 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/13 11:31:55 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void error_handler(t_pipex *pipex, int exit_status, char *msg)
 	else if (exit_status == 127)
 	{
 		ft_putstr_fd("pipex: ", 2);
-		ft_putstr_fd(pipex->argv[0], 2);
+		ft_putstr_fd(pipex->argv_childs[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
-		free_split(pipex->argv);
-		free_split(pipex->path_env);
+		free_split(pipex->argv_childs);
+		free_split(pipex->path);
 	}
 	exit(exit_status);
 }
