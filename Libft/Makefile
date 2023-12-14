@@ -6,13 +6,13 @@
 #    By: alisson <alisson@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 10:35:42 by almarcos          #+#    #+#              #
-#    Updated: 2023/11/22 10:09:23 by alisson          ###   ########.fr        #
+#    Updated: 2023/12/14 12:01:38 by alisson          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g -O0
+CFLAGS = -Wall -Werror -Wextra -g3 -O0
 OBJECTS_FOLDER = ./obj/
 
 SOURCES = ft_isalnum.c ft_isalpha.c ft_isascii.c \
