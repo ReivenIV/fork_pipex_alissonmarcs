@@ -22,6 +22,9 @@ $(LIBFT):
 $(OBJECTS_FOLDER)%.o: $(MANDATORY_FOLDER)%.c $(MANDATORY_FOLDER)pipex.h
 	cc $(CFLAGS) -c $< -o $@
 
+valgrind: all
+	valgrind --leak-check=full --trace-children=yes --trace-children-skip=/usr/bin/tr,/usr/bin/ls ./pipex .gitignore "tr a-z A-Z" "ls -l" outfile
+
 clean:
 	rm -rf $(OBJECTS_FOLDER)*
 
@@ -30,4 +33,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: clean fclean re all
+.PHONY: clean fclean re all valgrind
