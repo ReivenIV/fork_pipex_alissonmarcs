@@ -6,7 +6,7 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:55:10 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/14 13:19:56 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/14 15:17:21 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int argc, char *argv[], char *env[])
 {
 	t_pipex	pipex;
-	int exit_status;
+	int		exit_status;
 
 	init_pipex(&pipex, argc, argv, env);
 	first_child(&pipex, argv[2]);
