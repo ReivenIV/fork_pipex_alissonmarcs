@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror -g3 -O0
 OBJECTS_FOLDER = ./obj/
 
 MANDATORY_FOLDER = ./mandatory/
-MANDATORY_SOURCES = $(addprefix $(MANDATORY_FOLDER), main.c helpers.c fork_exec.c error_handler.c)
+MANDATORY_SOURCES = $(addprefix $(MANDATORY_FOLDER), main.c helpers.c childs.c error_handler.c)
 MANDATORY_OBJECTS = $(subst $(MANDATORY_FOLDER),$(OBJECTS_FOLDER),$(MANDATORY_SOURCES:.c=.o))
 
 all: $(OBJECTS_FOLDER) $(NAME)
