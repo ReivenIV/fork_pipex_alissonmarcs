@@ -6,7 +6,7 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:37:24 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/14 12:56:06 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/14 13:21:42 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void init_pipex(t_pipex *pipex, int argc, char **argv, char **env)
 {
+	if (argc != 5)
+		error_handler(pipex, 3, NULL);
 	pipex->parent_argv = argv;
 	pipex->parent_argc = argc;
 	pipex->parent_env = env;
