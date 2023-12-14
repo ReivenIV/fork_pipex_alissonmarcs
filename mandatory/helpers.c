@@ -6,7 +6,7 @@
 /*   By: alisson <alisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:37:24 by almarcos          #+#    #+#             */
-/*   Updated: 2023/12/13 11:56:42 by alisson          ###   ########.fr       */
+/*   Updated: 2023/12/14 12:56:06 by alisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void second_child(t_pipex *pipex, char *command)
 	if (pipex->second_child == 0)
 	{
 		close(pipex->tube[1]);
-		outfile = open(pipex->parent_argv[pipex->parent_argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0700);
+		outfile = open(pipex->parent_argv[pipex->parent_argc - 1], O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		if (outfile == -1)
 		{
 			close(pipex->tube[0]);
