@@ -36,7 +36,7 @@ $(NAME_BONUS): $(LIBFT) $(BONUS_OBJECTS)
 $(OBJECTS_FOLDER)%.o: $(BONUS_FOLDER)%.c $(BONUS_FOLDER)pipex_bonus.h
 	cc $(CFLAGS) -c $< -o $@
 
-valgrind: all
+val:
 	valgrind --leak-check=full --trace-children=yes --trace-children-skip=/usr/bin/tr,/usr/bin/ls \
 	./pipex .gitignore "tr a-z A-Z" "ls -l" outfile
 
