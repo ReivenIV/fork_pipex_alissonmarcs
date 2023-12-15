@@ -23,7 +23,7 @@ void	error_handler(t_pipex *pipex, int exit_status, char *msg)
 		ft_putstr_fd("pipex: split function failed\n", 2);
 	else if (exit_status == 3)
 		ft_putstr_fd("Invalid arguments. Take a look in "
-			"https://github.com/alissonmarcs/pipex for exemples of usage.\n",
+			"https://github.com/alissonmarcs/pipex for examples of usage.\n",
 			2);
 	else if (exit_status == 127)
 	{
