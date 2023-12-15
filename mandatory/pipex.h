@@ -14,10 +14,8 @@
 
 # define PIPEX_H
 # include "../Libft/libft.h"
-# include <errno.h>
 # include <fcntl.h>
 # include <stdio.h>
-# include <string.h>
 # include <sys/wait.h>
 # include <unistd.h>
 
@@ -26,12 +24,14 @@ typedef struct s_pipex
 	int		tube[2];
 	pid_t	first_child;
 	pid_t	second_child;
-	char	**argv_childs;
 	int		parent_argc;
 	char	**parent_argv;
 	char	**parent_env;
+	char	**argv_childs;
 	char	**path;
 }			t_pipex;
+
+# define GET_EXIT_STATUS(status) (((status) & 0xff00) >> 8)
 
 /* helpers.c */
 void		init_pipex(t_pipex *pipex, int argc, char **argv, char **env);
@@ -43,7 +43,7 @@ void		free_split(char **split);
 /* error_handler.c */
 void		error_handler(t_pipex *pipex, int exit_status, char *msg);
 
-/* fork_exec.c */
+/* childs.c */
 void		first_child(t_pipex *pipex, char *command);
 void		second_child(t_pipex *pipex, char *command);
 void		execute(t_pipex *pipex, char *command);
