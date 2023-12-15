@@ -24,7 +24,6 @@ typedef struct s_pipex
 	int		tube[2];
 	pid_t	first_child;
 	pid_t	second_child;
-	int		parent_argc;
 	char	**parent_argv;
 	char	**parent_env;
 	char	**argv_childs;

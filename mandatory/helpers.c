@@ -17,7 +17,6 @@ void	init_pipex(t_pipex *pipex, int argc, char **argv, char **env)
 	if (argc != 5)
 		error_handler(pipex, 3, NULL);
 	pipex->parent_argv = argv;
-	pipex->parent_argc = argc;
 	pipex->parent_env = env;
 	get_path(pipex);
 	open_tube(pipex);
