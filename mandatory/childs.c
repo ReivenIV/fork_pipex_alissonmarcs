@@ -41,14 +41,13 @@ void	second_child(t_pipex *pipex, char *command)
 	if (pipex->second_child == 0)
 	{
 		close(pipex->tube[1]);
-		outfile = open(pipex->parent_argv[pipex->parent_argc - 1],
-				O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR
-				| S_IRGRP | S_IROTH);
+		outfile = open(pipex->parent_argv[4], O_RDWR | O_CREAT | O_TRUNC,
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		if (outfile == -1)
 		{
 			close(pipex->tube[0]);
 			free_split(pipex->path);
-			error_handler(pipex, 1, pipex->parent_argv[pipex->parent_argc - 1]);
+			error_handler(pipex, 1, pipex->parent_argv[4]);
 		}
 		dup2(pipex->tube[0], STDIN_FILENO);
 		dup2(outfile, STDOUT_FILENO);
@@ -92,4 +91,9 @@ char	*find_executable(t_pipex *pipex)
 		i++;
 	}
 	return (NULL);
+}
+
+int	get_exit_status(int exit_status)
+{
+	return (((exit_status & 0xff00)) >> 8);
 }

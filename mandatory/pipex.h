@@ -31,8 +31,6 @@ typedef struct s_pipex
 	char	**path;
 }			t_pipex;
 
-# define GET_EXIT_STATUS(status) (((status) & 0xff00) >> 8)
-
 /* helpers.c */
 void		init_pipex(t_pipex *pipex, int argc, char **argv, char **env);
 void		open_tube(t_pipex *pipex);
@@ -48,5 +46,6 @@ void		first_child(t_pipex *pipex, char *command);
 void		second_child(t_pipex *pipex, char *command);
 void		execute(t_pipex *pipex, char *command);
 char		*find_executable(t_pipex *pipex);
+int			get_exit_status(int exit_status);
 
 #endif

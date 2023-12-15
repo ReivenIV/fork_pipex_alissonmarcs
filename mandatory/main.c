@@ -24,5 +24,5 @@ int	main(int argc, char *argv[], char *env[])
 	close_tube(&pipex);
 	waitpid(pipex.second_child, &exit_status, 0);
 	free_split(pipex.path);
-	exit(GET_EXIT_STATUS(exit_status));
+	exit(get_exit_status(exit_status));
 }
