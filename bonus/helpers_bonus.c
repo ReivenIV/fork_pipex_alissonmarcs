@@ -132,22 +132,26 @@ void run_first_command(t_pipex *pipex)
 
 void run_last_command(t_pipex *pipex)
 {
-	int		outfile;
+	char	*last_command;
+	char	*outfile_name;
+	int		outfile_fd;
 	int		exit_status;
 	pid_t	pid;
 
+	last_command = pipex->parent_argv[pipex->parent_argc - 2];
+	outfile_name = pipex->parent_argv[pipex->parent_argc - 1];
 	pid = fork();
 	if (pid == 0)
 	{
-		outfile = open(pipex->parent_argv[pipex->parent_argc - 1],
-			O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-		if (outfile == -1)
+		outfile_fd = open(outfile_name, O_RDWR | O_CREAT | O_TRUNC,
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+		if (outfile_fd == -1)
 		{
 			free_split(pipex->path);
-			error_handler(pipex, 1, pipex->parent_argv[pipex->parent_argc - 1]);
+			error_handler(pipex, 1, outfile_name);
 		}
-		dup2(outfile, STDOUT_FILENO);
-		execute(pipex, pipex->parent_argv[pipex->parent_argc - 2]);
+		dup2(outfile_fd, STDOUT_FILENO);
+		execute(pipex, last_command);
 	}
 	waitpid(pid, &exit_status, 0);
 	pipex->exit_status_last_command = exit_status;
