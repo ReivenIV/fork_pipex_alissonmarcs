@@ -48,6 +48,7 @@ void	free_split(char **split)
 void	execute(t_pipex *pipex, char *command)
 {
 	char	*executable;
+	char	*tmp;
 	char	**argv;
 
 	argv = ft_split(command, ' ');
@@ -56,8 +57,9 @@ void	execute(t_pipex *pipex, char *command)
 	executable = find_executable(pipex, argv[0]);
 	if (executable == NULL)
 	{
+		tmp = ft_strdup(argv[0]);
 		free_split(argv);
-		error_handler(pipex, 127, NULL);
+		error_handler(pipex, 127, tmp);
 	}
 	execve(executable, argv, pipex->parent_env);
 }
@@ -152,4 +154,27 @@ void run_last_command(t_pipex *pipex)
 	}
 	waitpid(pid, &exit_status, 0);
 	pipex->exit_status_last_command = exit_status;
+}
+
+void run_middle_commands(t_pipex *pipex, int command_index)
+{
+	char	*command;
+	int		tube[2];
+	pid_t	pid;
+
+	command = pipex->parent_argv[command_index];
+	if (pipe(tube) == -1)
+		error_handler(pipex, 1, NULL);
+	pid = fork();
+	if (pid == 0)
+	{
+		close(tube[0]);
+		dup2(tube[1], STDOUT_FILENO);
+		execute(pipex, command);
+	}
+	else
+	{
+		close(tube[1]);
+		dup2(tube[0], STDIN_FILENO);
+	}
 }
