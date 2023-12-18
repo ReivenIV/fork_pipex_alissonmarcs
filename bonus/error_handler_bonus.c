@@ -27,6 +27,12 @@ void	error_handler(t_pipex *pipex, int exit_status, char *msg)
 			"https://github.com/alissonmarcs/pipex for examples of usage.\n",
 			2);
 	else if (exit_status == 127)
+	{
+		ft_putstr_fd("pipex: ", 2);
+		ft_putstr_fd(msg, 2);
+		ft_putstr_fd(": command not found\n", 2);
+		free(msg);
 		free_split(pipex->path);
+	}
 	exit(exit_status);
 }
