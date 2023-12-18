@@ -15,14 +15,10 @@
 int	main(int argc, char *argv[], char *env[])
 {
 	t_pipex	pipex;
-	int		exit_status;
 
 	init_pipex(&pipex, argc, argv, env);
-	first_child(&pipex, argv[2]);
-	waitpid(pipex.first_child, NULL, 0);
-	second_child(&pipex, argv[3]);
-	close_tube(&pipex);
-	waitpid(pipex.second_child, &exit_status, 0);
+	run_first_command(&pipex);
+	run_last_command(&pipex);
 	free_split(pipex.path);
-	exit(get_exit_status(exit_status));
+	exit(get_exit_status(pipex.exit_status_last_command));
 }
