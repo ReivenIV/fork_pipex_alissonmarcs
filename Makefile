@@ -1,7 +1,7 @@
 NAME = pipex
 NAME_BONUS = pipex_bonus
 LIBFT = ./Libft/libft.a
-CFLAGS = -Wall -Wextra -Werror -g3 -O0
+CFLAGS = -Wall -Werror -Wextra -g3 -O0
 
 OBJECTS_FOLDER = ./obj/
 
@@ -11,7 +11,7 @@ MANDATORY_OBJECTS = $(subst $(MANDATORY_FOLDER),$(OBJECTS_FOLDER),$(MANDATORY_SO
 
 BONUS_FOLDER = ./bonus/
 BONUS_SOURCES = $(addprefix $(BONUS_FOLDER), main_bonus.c helpers_bonus.c \
-	childs_bonus.c error_handler_bonus.c)
+	error_handler_bonus.c)
 BONUS_OBJECTS = $(subst $(BONUS_FOLDER),$(OBJECTS_FOLDER),$(BONUS_SOURCES:.c=.o))
 
 all: $(OBJECTS_FOLDER) $(NAME)
@@ -37,8 +37,8 @@ $(OBJECTS_FOLDER)%.o: $(BONUS_FOLDER)%.c $(BONUS_FOLDER)pipex_bonus.h
 	cc $(CFLAGS) -c $< -o $@
 
 val:
-	valgrind --leak-check=full --trace-children=yes --trace-children-skip=/usr/bin/tr,/usr/bin/ls \
-	./pipex .gitignore "tr a-z A-Z" "ls -l" outfile
+	valgrind --leak-check=full --track-fds=yes --trace-children=yes \
+	--trace-children-skip=/usr/bin/cat,/usr/bin/tail ./pipex_bonus .gitignore tail cat outfile
 
 clean:
 	rm -rf $(OBJECTS_FOLDER)*
