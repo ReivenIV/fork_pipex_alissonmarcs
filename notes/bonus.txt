@@ -1,0 +1,49 @@
+# 1
+here_doc funciona com número arbitrario de comandos?
+Sim
+
+# 2
+here_doc original só para de funcionar quando a última linha tem como conteúdo somente o DELIMITADOR.
+
+# 3
+tentativa de ler um pipe que está vazio bloqueia o processo, até que algum byte esteja disponível (algum byte seja escrito no write end desse pipe).
+
+se o write end do pipe está fechado, o processo lendo no read end receberá EOF (end of file, read() retorna 0), quando todos os bytes do pipe forem lidos. 
+
+se um processo vai ler de um pipe, ele precisa fechar o "write end" do pipe. se um processo vai escrever em um pipe, ele precisa fechar o "read end" do pipe.
+
+# 4
+se chamamos read(0, buffer, 1), e entramos mais de um byte, o que será que acontece? provavelmente o kernel cria um buffer do conteúdo extra e entrega ele nas próximas calls do read().
+
+# 5
+para fazer o here_doc:
+crio um pipe, faço um fork, esse processo filho vai ler do stdin (get_next_line(0)), e escreve esse conteúdo no write end do pipe. o processo pai vai ter seu stdin redirecionado ao read end desse pipe.
+
+# 6
+se argc - 1 nos dá o último item do argv, argc - 2 nos dá o penúltimo item do argv.
+
+# 7
+infile será input do parent. chama a função para criar filhos. cria o pipe, cria o fork. o infile é input do filho (ou read end do pipe anterior), o output do filho vai pro write end do pipe. no parent, seu input será o read end do pipe. re-chama a função para criar filhos.
+
+# 8
+No exemplo abaixo, o arquivo "no" não exite, e o comando ./a.out cria no diretório atual um arquivo chamado "drogass". Veja que logo em seguida executamos o comando "ls" e não há a presença do arquivo "drogass". Podemos deduzir, então, que quando o "infile" não existe, o primeiro comando não é executado.
+
+alisson@archlinux:~/repos/my_pipex$ < no ./a.out | head -5 | cat > outfile
+bash: no: No such file or directory
+alisson@archlinux:~/repos/my_pipex$ ls
+a.out  infile  Makefile   notes  outfile  pipex_bonus  pipex-tester  README.md
+bonus  Libft   mandatory  obj    pipex    pipexMedic   PIPEX_TESTER  tmp.c
+
+Dado isso, qual será o input do comando "head -5"?
+
+# 9
+No exemplo abaixo, o arquivo "no" não existe. O comando "./a.out", quando executado, cria no diretório atual um arquivo chamado "drogass". O primeiro comando não será executado, como deduzimos acima. Podemos fazer uma segunda dedução aqui: os comandos seguintes a um comando que não é executado, são executados. Podemos deduzir isso porque, logo após rodar a linha de comandos a seguir, rodamos um "ls" e o arquivo "drogass" está presente.
+
+alisson@archlinux:~/repos/my_pipex$ < no cat | ./a.out | cat > outfile
+bash: no: No such file or directory
+alisson@archlinux:~/repos/my_pipex$ ls
+a.out  drogass  Libft     mandatory  obj      pipex        pipexMedic    PIPEX_TESTER  tmp.c
+bonus  infile   Makefile  notes      outfile  pipex_bonus  pipex-tester  README.md
+
+#10
+Abrir o infile no parent ou no child? No child creio que seja mais fácil por que, se o inflie nao existir, só do exit() no child e continuo a execução dos comandos seguintes. Como eu contornaria isso no parent?
