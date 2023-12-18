@@ -114,10 +114,7 @@ void run_first_command(t_pipex *pipex)
 		close(tube[0]);
 		infile = open(pipex->parent_argv[1], O_RDONLY);
 		if (infile == -1)
-		{
-			free_split(pipex->path);
 			error_handler(pipex, 1, pipex->parent_argv[1]);
-		}
 		dup2(infile, STDIN_FILENO);
 		dup2(tube[1], STDOUT_FILENO);
 		close(infile);
@@ -146,10 +143,7 @@ void run_last_command(t_pipex *pipex)
 		outfile_fd = open(outfile_name, O_RDWR | O_CREAT | O_TRUNC,
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		if (outfile_fd == -1)
-		{
-			free_split(pipex->path);
 			error_handler(pipex, 1, outfile_name);
-		}
 		dup2(outfile_fd, STDOUT_FILENO);
 		execute(pipex, last_command);
 	}

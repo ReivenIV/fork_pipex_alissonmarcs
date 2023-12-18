@@ -16,6 +16,7 @@ void	error_handler(t_pipex *pipex, int exit_status, char *msg)
 {
 	if (exit_status == 1)
 	{
+		free_split(pipex->path);
 		ft_putstr_fd("pipex: ", 2);
 		perror(msg);
 	}
