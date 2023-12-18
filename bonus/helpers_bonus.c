@@ -114,7 +114,10 @@ void run_first_command(t_pipex *pipex)
 		close(tube[0]);
 		infile = open(pipex->parent_argv[1], O_RDONLY);
 		if (infile == -1)
+		{
+			close(tube[1]);
 			error_handler(pipex, 1, pipex->parent_argv[1]);
+		}
 		dup2(infile, STDIN_FILENO);
 		dup2(tube[1], STDOUT_FILENO);
 		close(infile);
