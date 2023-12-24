@@ -49,12 +49,7 @@ void	get_path(t_pipex *pipex)
 	pipex->path = path;
 }
 
-void	free_split(char **split)
+int	get_exit_status(int exit_status)
 {
-	int	i;
-
-	i = 0;
-	while (split[i])
-		free(split[i++]);
-	free(split);
+	return (((exit_status & 0xff00)) >> 8);
 }

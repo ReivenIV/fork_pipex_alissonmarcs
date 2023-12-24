@@ -35,16 +35,9 @@ void		init_pipex(t_pipex *pipex, int argc, char **argv, char **env);
 void		open_tube(t_pipex *pipex);
 void		close_tube(t_pipex *pipex);
 void		get_path(t_pipex *pipex);
-void		free_split(char **split);
+int			get_exit_status(int exit_status);
 
 /* error_handler.c */
 void		error_handler(t_pipex *pipex, int exit_status, char *msg);
-
-/* childs.c */
-void		first_child(t_pipex *pipex, char *command);
-void		second_child(t_pipex *pipex, char *command);
-void		execute(t_pipex *pipex, char *command);
-char		*find_executable(t_pipex *pipex);
-int			get_exit_status(int exit_status);
 
 #endif
