@@ -30,8 +30,8 @@ void	error_handler(t_pipex *pipex, int exit_status, char *msg)
 		ft_putstr_fd("pipex: ", 2);
 		ft_putstr_fd(pipex->argv_childs[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
-		free_split(pipex->argv_childs);
-		free_split(pipex->path);
+		ft_free_split(pipex->argv_childs);
+		ft_free_split(pipex->path);
 	}
 	exit(exit_status);
 }
