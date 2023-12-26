@@ -24,7 +24,6 @@ int	main(int argc, char *argv[], char *env[])
 
 	init_pipex(&pipex, argc, argv, env);
 	first_child(&pipex, argv[2]);
-	waitpid(pipex.first_child, NULL, 0);
 	second_child(&pipex, argv[3]);
 	close_tube(&pipex);
 	waitpid(pipex.second_child, &exit_status, 0);
