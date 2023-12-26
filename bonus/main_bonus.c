@@ -61,7 +61,6 @@ static void	run_first_command(t_pipex *pipex)
 	dup2(tube[0], STDIN_FILENO);
 	close(tube[0]);
 	close(tube[1]);
-	waitpid(pid, NULL, 0);
 }
 
 static void	run_last_command(t_pipex *pipex)
