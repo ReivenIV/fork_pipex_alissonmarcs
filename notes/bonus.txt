@@ -47,3 +47,38 @@ bonus  infile   Makefile  notes      outfile  pipex_bonus  pipex-tester  README.
 
 #10
 Abrir o infile no parent ou no child? No child creio que seja mais fácil por que, se o inflie nao existir, só do exit() no child e continuo a execução dos comandos seguintes. Como eu contornaria isso no parent?
+
+#11
+Sobre o erro de valgrind quando:
+valgrind [valgrind options...] ./pipex_bonus .gitignore "/usr/bin/ls -la ../../" "/usr/bin/tr a-z A-Z" "/usr/bin/tac" "nl" "tail -10" "head -10" "echo hora da verdade" "./a.out" outfile
+
+valgrind:  A must-be-redirected function
+valgrind:  whose name matches the pattern:      strlen
+valgrind:  in an object with soname matching:   ld-linux-x86-64.so.2
+valgrind:  was not found whilst processing
+valgrind:  symbols from the object with soname: ld-linux-x86-64.so.2
+
+O arquivo ld-linux-x86-64 não contém a definição da função strlen devido a uma otimização na hora de compilá-lo.
+
+Se integre nas listas de email de algum projeto open source.
+Contribua para wiki de algum projeto opensource.
+
+#12
+./pipex .gitignore nl cat outfile
+./pipex no nl cat outfile
+./pipex no nl "echo salve" outfile
+./pipex .gitignore nl "echo salve" outfile
+./pipex .gitignore cat tac no
+./pipex .gitignore cat no outfile
+./pipex /dev/urandom cat "head -1" outfile
+./pipex .gitignore "tr a-z A-Z" no outfile (exit status)
+
+./pipex_bonus .gitignore "ls -la" "tr a-z A-Z" outfile
+./pipex_bonus .gitignore seq tac outfile
+./pipex_bonus .gitignore "factor 15" cat outfile
+./pipex_bonus .gitignore printenv nl outfile
+
+#13
+O counteudo após o 'file' é passado para o argv do 'a.out'.
+
+$ ./a.out opa1 opa2 opa3 opa4 > file salve1 salve2
