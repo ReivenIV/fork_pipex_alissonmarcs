@@ -1,6 +1,6 @@
 NAME = pipex
 NAME_BONUS = pipex_bonus
-LIBFT = ./Libft/libft.a
+LIBFT = ./libft/libft.a
 CFLAGS = -Wall -Werror -Wextra -g3 -O0
 
 OBJECTS_FOLDER = ./obj/
@@ -22,7 +22,7 @@ $(NAME): $(LIBFT) $(MANDATORY_OBJECTS)
 	cc $(CFLAGS) $(MANDATORY_OBJECTS) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
-	make -C Libft
+	make -C libft
 
 $(OBJECTS_FOLDER)%.o: $(MANDATORY_FOLDER)%.c $(MANDATORY_FOLDER)pipex.h
 	cc $(CFLAGS) -c $< -o $@
