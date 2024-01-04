@@ -6,7 +6,7 @@
 /*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 21:07:36 by alisson           #+#    #+#             */
-/*   Updated: 2024/01/03 17:00:20 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/01/04 12:02:54 by almarcos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	open_infile(t_pipex *pipex)
 {
 	int		infile;
 
-	if (pipex->here_doc)
-		return (here_doc(pipex, pipex->parent_argv[2]));
 	infile = open(pipex->parent_argv[1], O_RDONLY);
 	if (infile == -1)
 		error_handler(pipex, 1, pipex->parent_argv[1]);
