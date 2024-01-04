@@ -6,7 +6,7 @@
 /*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:55:07 by almarcos          #+#    #+#             */
-/*   Updated: 2024/01/03 16:52:21 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:25:51 by almarcos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char		*find_executable(t_pipex *pipex, char *name);
 int			get_exit_status(int exit_status);
 
 /* open_files_bonus.c */
-int			open_infile(t_pipex *pipex);
+int			open_infile(t_pipex *pipex, int *tube_first_commad);
 int			open_outfile(t_pipex *pipex);
 int			here_doc(t_pipex *pipex, char *delimiter);
 void		error_handler(t_pipex *pipex, int exit_status, char *msg);

@@ -6,7 +6,7 @@
 /*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:55:10 by almarcos          #+#    #+#             */
-/*   Updated: 2024/01/04 11:53:56 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:22:24 by almarcos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ static void	run_first_command(t_pipex *pipex)
 
 	if (pipe(tube) == -1)
 		error_handler(pipex, 1, NULL);
-	if (pipex->here_doc)
+	if (pipex->here_doc == TRUE)
 		infile = here_doc(pipex, pipex->parent_argv[2]);
 	pid = fork();
 	if (pid == 0)
 	{
 		close(tube[0]);
 		if (pipex->here_doc == FALSE)
-			infile = open_infile(pipex);
+			infile = open_infile(pipex, tube);
 		dup2(infile, STDIN_FILENO);
 		dup2(tube[1], STDOUT_FILENO);
 		close(infile);
@@ -64,6 +64,8 @@ static void	run_first_command(t_pipex *pipex)
 	dup2(tube[0], STDIN_FILENO);
 	close(tube[0]);
 	close(tube[1]);
+	if (pipex->here_doc == TRUE)
+		close(infile);
 }
 
 static void	run_last_command(t_pipex *pipex)

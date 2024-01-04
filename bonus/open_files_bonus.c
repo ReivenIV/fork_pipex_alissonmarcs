@@ -6,19 +6,22 @@
 /*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 21:07:36 by alisson           #+#    #+#             */
-/*   Updated: 2024/01/04 12:02:54 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:26:09 by almarcos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	open_infile(t_pipex *pipex)
+int	open_infile(t_pipex *pipex, int *tube_first_command)
 {
 	int		infile;
 
 	infile = open(pipex->parent_argv[1], O_RDONLY);
 	if (infile == -1)
+	{
+		close(tube_first_command[1]);
 		error_handler(pipex, 1, pipex->parent_argv[1]);
+	}
 	return (infile);
 }
 
