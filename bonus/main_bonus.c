@@ -6,7 +6,7 @@
 /*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:55:10 by almarcos          #+#    #+#             */
-/*   Updated: 2024/01/03 17:00:17 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:45:49 by almarcos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ static void	run_last_command(t_pipex *pipex)
 
 static void	run_middle_commands(t_pipex *pipex, int command_index)
 {
-	char	*command;
+	char	*middle_command;
 	int		tube[2];
 	pid_t	pid;
 
-	command = pipex->parent_argv[command_index];
+	middle_command = pipex->parent_argv[command_index];
 	if (pipe(tube) == -1)
 		error_handler(pipex, 1, NULL);
 	pid = fork();
@@ -99,7 +99,7 @@ static void	run_middle_commands(t_pipex *pipex, int command_index)
 		close(tube[0]);
 		dup2(tube[1], STDOUT_FILENO);
 		close(tube[1]);
-		execute(pipex, command);
+		execute(pipex, middle_command);
 	}
 	else
 	{
