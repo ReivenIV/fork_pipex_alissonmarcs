@@ -36,9 +36,9 @@ $(OBJECTS_FOLDER)%.o: $(BONUS_FOLDER)%.c $(BONUS_FOLDER)pipex_bonus.h
 	cc $(CFLAGS) -c $< -o $@
 
 val:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes \
+	valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes \
 	--trace-children=yes --trace-children-skip=*/bin/*,*/sbin/*,./a.out \
-	./pipex "/dev/urandom" cat "head -1" "out"
+	./pipex_bonus .gitignore "nl" "tr a-z A-Z" "cat" outfile
 
 clean:
 	rm -rf $(OBJECTS_FOLDER)*
