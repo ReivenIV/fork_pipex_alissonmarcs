@@ -48,21 +48,21 @@ void	get_path(t_pipex *pipex)
 
 void	execute(t_pipex *pipex, char *command)
 {
-	char	*executable;
-	char	*tmp;
-	char	**argv;
+	char	*command_file;
+	char	*command_not_found;
+	char	**command_argv;
 
-	argv = ft_split(command, ' ');
-	if (argv == NULL)
+	command_argv = ft_split(command, ' ');
+	if (command_argv == NULL)
 		error_handler(pipex, 2, NULL);
-	executable = find_executable(pipex, argv[0]);
-	if (executable == NULL)
+	command_file = find_executable(pipex, command_argv[0]);
+	if (command_file == NULL)
 	{
-		tmp = ft_strdup(argv[0]);
-		ft_free_split(argv);
-		error_handler(pipex, 127, tmp);
+		command_not_found = ft_strdup(command_argv[0]);
+		ft_free_split(command_argv);
+		error_handler(pipex, 127, command_not_found);
 	}
-	execve(executable, argv, pipex->parent_env);
+	execve(command_file, command_argv, pipex->parent_env);
 }
 
 char	*find_executable(t_pipex *pipex, char *name)
