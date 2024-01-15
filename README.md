@@ -20,6 +20,7 @@ Compiling with `make bonus` you will be able to use any number of commands and h
 
 ## How to use
 
+Quotes are mandatory when command receive arguments.
 ```
 $ ./pipex_bonus Makefile "tr A-Z a-z" nl outfile
 ```
