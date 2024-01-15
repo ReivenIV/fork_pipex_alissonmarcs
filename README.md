@@ -31,6 +31,15 @@ $ ./pipex_bonus Makefile "tr A-Z a-z" nl outfile
 
 
 ```
+$ ./pipex_bonus Makefile "ps aux" nl outfile
+```
+
+- `Makefile` will be input for `ps`, but `ps` doesn't receive input, so it will not be used.
+- `ps aux` list current running processes.
+- `nl` enumerate lines.
+- `outfile` destination file.
+
+```
 $ ./pipex_bonus .gitignore "tr a-z A-Z" nl outfile
 ```
 
