@@ -59,7 +59,7 @@ $ ./pipex_bonus Makefile nl tac "head -25" outfile
 - `outfile` destination file.
 
 ```
-$ ./pipex_bonus Makefile "tr A-Z a-z" nl tac "cat" "tail -25" outfile
+$ ./pipex_bonus Makefile "tr A-Z a-z" nl tac cat "tail -25" outfile
 ```
 
 - `Makefile` will be input file for `tr`.
