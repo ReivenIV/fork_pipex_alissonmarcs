@@ -1,15 +1,13 @@
 <div align="center">
 	<h1>Pipex</h1>
-	<img src="https://raw.githubusercontent.com/alissonmarcs/42-project-badges/main/badges/pipexm.png"/>
-	<p align="center" alt="Pipex project badge of 42">A 42 project where we have to imitate shell pipelines and input/output file redirections.</p>
+	<img src="https://raw.githubusercontent.com/alissonmarcs/42-project-badges/main/badges/pipexm.png" alt="Pipex project badge of 42"/>
+	<p align="center">A 42 project where we have to imitate shell pipelines and input/output file redirections.</p>
 </div>
-
 
 <div align="center">
 	<h2>Final score</h2>
 	<img src="https://i.imgur.com/dL7Srhr.png" alt="Project scored with 125/100">
 </div>
-
 
 ## How to compile
 
