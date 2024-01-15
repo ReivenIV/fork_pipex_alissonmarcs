@@ -18,7 +18,7 @@ $ make bonus
 ```
 Compiling with `make bonus` you will be able to use any number of commands and here_doc.
 
-## Examples
+## How to use
 
 ```
 $ ./pipex_bonus Makefile "tr A-Z a-z" nl outfile
