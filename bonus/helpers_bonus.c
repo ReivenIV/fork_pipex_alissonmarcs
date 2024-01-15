@@ -71,8 +71,7 @@ char	*find_executable(t_pipex *pipex, char *name)
 	char	*tmp;
 	int		i;
 
-	if ((ft_strncmp(name, "./", 2) == 0 || name[0] == '/')
-		&& access(name, X_OK) == 0)
+	if (access(name, X_OK) == 0)
 		return (name);
 	i = 0;
 	while (pipex->path[i])
