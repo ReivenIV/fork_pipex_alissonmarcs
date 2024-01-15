@@ -99,8 +99,7 @@ static	char	*find_executable(t_pipex *pipex)
 	int		i;
 
 	command = pipex->argv_childs[0];
-	if ((ft_strncmp(command, "./", 2) == 0 || command[0] == '/')
-		&& access(command, X_OK) == 0)
+	if (access(command, X_OK) == 0)
 		return (command);
 	i = 0;
 	while (pipex->path[i])
