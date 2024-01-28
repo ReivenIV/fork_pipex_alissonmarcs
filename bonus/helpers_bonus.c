@@ -52,6 +52,8 @@ void	execute(t_pipex *pipex, char *command)
 	char	*command_not_found;
 	char	**command_argv;
 
+	if (command[0] == '\0')
+		error_handler(pipex, 127, NULL);
 	command_argv = ft_split(command, ' ');
 	if (command_argv == NULL)
 		error_handler(pipex, 2, NULL);
