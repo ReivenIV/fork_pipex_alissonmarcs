@@ -1,6 +1,6 @@
 <div align="center">
 	<h1>Pipex</h1>
-	<img src="https://raw.githubusercontent.com/alissonmarcs/42-project-badges/main/badges/pipexm.png" alt="Pipex project badge of 42"/>
+	<img src="https://raw.githubusercontent.com/alissonmarcs/alissonmarcs/main/images/pipexm.png" alt="Pipex project badge of 42"/>
 	<p align="center">A 42 project where we have to imitate shell pipelines and input/output file redirections.</p>
 </div>
 
