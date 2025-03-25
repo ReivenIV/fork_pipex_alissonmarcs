@@ -84,7 +84,6 @@ static void	run_last_command(t_pipex *pipex)
 		close(outfile);
 		execute(pipex, last_command);
 	}
-	close(STDIN_FILENO);
 	waitpid(pid, &exit_status, 0);
 	pipex->exit_status_last_command = exit_status;
 }
